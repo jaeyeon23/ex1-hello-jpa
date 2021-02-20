@@ -9,38 +9,31 @@ import java.util.List;
 public class JpaMain {
 
     public static void main(String[] args) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("hello");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
 
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityManager em = emf.createEntityManager();
 
-        EntityTransaction tx = entityManager.getTransaction();
+        EntityTransaction tx = em.getTransaction();
         tx.begin();
 
         try{
-            /*Member member = new Member();
+            Member findMember = em.find(Member.class, 1L);
+            System.out.println(findMember.getName());
 
-            member.setId(2L);
-            member.setName("HelloB");*/
+            // em.remove(findMember);
 
-            //entityManager.persist(member);
-
-            Member findMember = entityManager.find(Member.class, 1L);
-            findMember.setName("HelloJPA");
-
-            List<Member> result = entityManager.createQuery("select m from Member", Member.class)
+            List<Member> findMembers = em.createQuery("select m from Member as m", Member.class)
                     .getResultList();
 
-            for (Member member : result) {
+            for (Member member : findMembers) {
                 System.out.println("member.name = " + member.getName());
             }
-
             tx.commit();
-        } catch (Exception e){
+        } catch (Exception e) {
             tx.rollback();
         } finally {
-            entityManager.close();
+            em.close();
         }
-
-        entityManagerFactory.close();
+        emf.close();
     }
 }
