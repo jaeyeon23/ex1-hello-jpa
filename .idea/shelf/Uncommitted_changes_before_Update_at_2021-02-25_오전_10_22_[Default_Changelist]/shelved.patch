@@ -1,0 +1,81 @@
+Index: src/main/java/hellojpa/Member.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package hellojpa;\r\n\r\nimport javax.persistence.Entity;\r\nimport javax.persistence.Id;\r\n\r\n@Entity\r\npublic class Member {\r\n\r\n    @Id\r\n    private Long id;\r\n    private String name;\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n\r\n    public Long getId() {\r\n        return id;\r\n    }\r\n\r\n    public void setId(Long id) {\r\n        this.id = id;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/hellojpa/Member.java b/src/main/java/hellojpa/Member.java
+--- a/src/main/java/hellojpa/Member.java	(revision 6f4c74d4d979d058f67a8d99ba1f8dcad5a4c894)
++++ b/src/main/java/hellojpa/Member.java	(date 1613973562947)
+@@ -10,6 +10,14 @@
+     private Long id;
+     private String name;
+ 
++    public Member() {
++    }
++
++    public Member(Long id, String name) {
++        this.id = id;
++        this.name = name;
++    }
++
+     public String getName() {
+         return name;
+     }
+Index: src/main/resources/META-INF/persistence.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<persistence version=\"2.2\"\r\n        xmlns=\"http://xmlns.jcp.org/xml/ns/persistence\"\r\n        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n        xsi:schemaLocation=\"http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence.xsd\">\r\n\r\n    <persistence-unit name=\"hello\"> <!-- 데이터베이스당 하나의 영속성 name은 영속성 고유의 이름으로 지정 -->\r\n\r\n        <properties>\r\n\r\n            <!-- 필수 -->\r\n            <property name=\"javax.persistence.jdbc.driver\" value=\"org.h2.Driver\"/>\r\n            <property name=\"javax.persistence.jdbc.user\" value=\"sa\"/>\r\n            <property name=\"javax.persistence.jdbc.password\" value=\"\"/>\r\n            <property name=\"javax.persistence.jdbc.url\" value=\"jdbc:h2:tcp://localhost/~/test\"/>\r\n            <!--데이터베이스 방언-->\r\n            <property name=\"hibernate.dialect\" value=\"org.hibernate.dialect.H2Dialect\" />\r\n\r\n            <!-- 옵션 -->\r\n            <property name=\"hibernate.show_sql\" value=\"true\" />\r\n            <property name=\"hibernate.format_sql\" value=\"true\" />\r\n            <property name=\"hibernate.use_sql_comments\" value=\"true\" />\r\n            <!--<property name=\"hibernate.id.new_generator_mappings\" value=\"true\" />-->\r\n\r\n            <!--<property name=\"hibernate.hbm2ddl.auto\" value=\"create\" />-->\r\n        </properties>\r\n    </persistence-unit>\r\n\r\n</persistence>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/META-INF/persistence.xml b/src/main/resources/META-INF/persistence.xml
+--- a/src/main/resources/META-INF/persistence.xml	(revision 6f4c74d4d979d058f67a8d99ba1f8dcad5a4c894)
++++ b/src/main/resources/META-INF/persistence.xml	(date 1613634599427)
+@@ -5,9 +5,7 @@
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence.xsd">
+ 
+     <persistence-unit name="hello"> <!-- 데이터베이스당 하나의 영속성 name은 영속성 고유의 이름으로 지정 -->
+-
+         <properties>
+-
+             <!-- 필수 -->
+             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+             <property name="javax.persistence.jdbc.user" value="sa"/>
+@@ -21,7 +19,6 @@
+             <property name="hibernate.format_sql" value="true" />
+             <property name="hibernate.use_sql_comments" value="true" />
+             <!--<property name="hibernate.id.new_generator_mappings" value="true" />-->
+-
+             <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
+         </properties>
+     </persistence-unit>
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\r\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n\r\n    <groupId>jpa-basic</groupId>\r\n    <artifactId>ex1-hello-jpa</artifactId>\r\n    <version>1.0.0</version>\r\n\r\n\r\n    <dependencies>\r\n        <!--JPA 하이버네이트-->\r\n        <dependency>\r\n            <groupId>org.hibernate</groupId>\r\n            <artifactId>hibernate-entitymanager</artifactId>\r\n            <version>5.3.10.Final</version>\r\n        </dependency>\r\n\r\n        <!--H2 데이터베이스-->\r\n        <dependency>\r\n            <groupId>com.h2database</groupId>\r\n            <artifactId>h2</artifactId>\r\n            <version>1.4.199</version>\r\n        </dependency>\r\n    </dependencies>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision 6f4c74d4d979d058f67a8d99ba1f8dcad5a4c894)
++++ b/pom.xml	(date 1613634548843)
+@@ -14,14 +14,14 @@
+         <dependency>
+             <groupId>org.hibernate</groupId>
+             <artifactId>hibernate-entitymanager</artifactId>
+-            <version>5.3.10.Final</version>
++            <version>5.4.27.Final</version>
+         </dependency>
+ 
+         <!--H2 데이터베이스-->
+         <dependency>
+             <groupId>com.h2database</groupId>
+             <artifactId>h2</artifactId>
+-            <version>1.4.199</version>
++            <version>1.4.200</version>
+         </dependency>
+     </dependencies>
+ </project>
+\ No newline at end of file

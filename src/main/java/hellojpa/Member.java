@@ -1,30 +1,38 @@
 package hellojpa;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javafx.util.converter.LocalDateTimeStringConverter;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "Member")
 public class Member {
 
+    // PK
     @Id
     private Long id;
-    private String name;
 
-    public String getName() {
-        return name;
-    }
+    // DB 컬럼 이름 : name
+    @Column(name = "name", insertable = true, updatable = true, nullable = false)
+    private String username;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    private int age;
 
-    public Long getId() {
-        return id;
-    }
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // 현재는 사용하지 않는다.
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifiedDate;
+
+    private LocalDateTime modifiedDate;
+
+    // varchar를 넘어서는 큰 컨텐츠
+    @Lob
+    private String description;
 }
