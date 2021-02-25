@@ -17,8 +17,8 @@ public class JpaMain {
         tx.begin();
 
         try{
-            /*Member findMember = em.find(Member.class, 1L);
-            System.out.println(findMember.getName());
+            Member findMember = em.find(Member.class, 1L);
+            System.out.println(findMember.getUsername());
 
             // em.remove(findMember);
 
@@ -26,8 +26,8 @@ public class JpaMain {
                     .getResultList();
 
             for (Member member : findMembers) {
-                System.out.println("member.name = " + member.getName());
-            }*/
+                System.out.println("member.name = " + member.getUsername());
+            }
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
